@@ -70,23 +70,41 @@ dependencies {
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2" //"1.1.+"
     // logging
     implementation "io.github.microutils:kotlin-logging:1.6.+"
+    implementation "org.slf4j:slf4j-simple:1.7.26" // required by javalin
+    /**
     implementation "net.logstash.logback:logstash-logback-encoder:5.+"
-    implementation "org.slf4j:slf4j-simple:1.7.26"
+    def logbackJsonVersion = '0.1.5'
+    implementation "ch.qos.logback.contrib:logback-json-classic:$logbackJsonVersion"
+    implementation "ch.qos.logback.contrib:logback-jackson:$logbackJsonVersion"
+    **/
+
+    // monitoring
+    implementation "io.micrometer:micrometer-registry-prometheus:1.2.0"
+
+    // serialization: jackson json
+    def jacksonVersion =  '2.9.9'
+    implementation "com.fasterxml.jackson.module:jackson-modules-java8:$jacksonVersion"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+
+
     // javalin
     compile 'io.javalin:javalin:3.2.0'
     // === test ===
     // test: junit5
-    def junitVersion = '5.4.+'
+    def junitVersion = '5.5.0' //''5.5.0' //'5.3.+'
     // see: https://stackoverflow.com/questions/54598484/gradle-5-junit-bom-and-spring-boot-incorrect-versions/54605523#54605523
     testImplementation(enforcedPlatform("org.junit:junit-bom:$junitVersion")) // JUnit 5 BOM
     testImplementation("org.junit.jupiter:junit-jupiter")
     // test: kotlin
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    testImplementation("org.amshove.kluent:kluent:1.49")
-    testImplementation("io.mockk:mockk:1.9.+")
-    testImplementation("dev.minutest:minutest:1.7.+")
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit"
+    testImplementation "org.amshove.kluent:kluent:1.52"
+    // test: mockk
+    testImplementation "io.mockk:mockk:1.9.+"
 }
