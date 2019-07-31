@@ -95,6 +95,15 @@ dependencies {
 
     // javalin
     compile 'io.javalin:javalin:3.2.0'
+
+    // swagger & redoc: https://javalin.io/plugins/openapi#annotations
+    implementation 'io.swagger.core.v3:swagger-models:2.0.8'
+    implementation 'cc.vileda:kotlin-openapi3-dsl:0.20.1'
+    compile 'org.webjars:swagger-ui:3.22.2'
+    compile 'io.github.classgraph:classgraph:4.8.34' // for swagger annotations
+    // redoc
+    compile 'org.webjars.npm:redoc:2.0.0-rc.2'
+
     // === test ===
     // test: junit5
     def junitVersion = '5.5.0' //''5.5.0' //'5.3.+'
