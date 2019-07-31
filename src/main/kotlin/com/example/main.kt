@@ -12,17 +12,27 @@ import io.javalin.plugin.openapi.dsl.documented
 import io.javalin.plugin.openapi.ui.ReDocOptions
 import io.javalin.plugin.openapi.ui.SwaggerOptions
 import io.swagger.v3.oas.models.info.Info
+import java.nio.charset.Charset
 
 data class User(val firstname:String)
 
 fun main(args: Array<String>) {
 
 
+    println(Charset.defaultCharset())
     val app = Javalin.create { config ->
-        config.defaultContentType = "application/json"
+       // config.defaultContentType = "application/json"
+        config.enableWebjars()
         config.addStaticFiles("/public")
         config.enableCorsForAllOrigins()
         config.registerPlugin(OpenApiPlugin(getOpenApiOptions()));
+        config.enableDevLogging()
+        //config.compressionStrategy(null,null)
+        config.autogenerateEtags = true
+        config.asyncRequestTimeout = 10_000L
+        //config.dynamicGzip = true
+        config.enforceSsl = false
+       // config.
 
 
     }
