@@ -43,7 +43,7 @@ fun main(args: Array<String>) {
     val addUserDocs = document()
             .body<User>()
             .result<Unit>("400")
-            .result<Unit>("204")
+            .result<User>("204")
 
     app.post("/users", UserController::createUser);
     app.post("/users/v2", documented(addUserDocs, ::addUserHandlerV2))
@@ -74,7 +74,8 @@ fun main(args: Array<String>) {
 fun addUserHandlerV2(ctx: Context) {
     val user = ctx.body<User>()
     //UserRepository.addUser(user)
-    ctx.status(204)
+    ctx.json(user)
+    ctx.status(200)
 }
 
 /*
